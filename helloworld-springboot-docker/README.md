@@ -10,9 +10,9 @@ written in Java Spring Boot using Docker.
 
 A Docker Image will be built from a JAR file generated from the previous Hello World Spring Boot Web exercise that can be found [here](../helloworld-springboot-web/README.md), a Container will be created from this image, and then run.
 
-## Prerequirements
+## Technologies used
 - **GIT**
-- **Java 17**: This project uses JDK version 22, but will run a Java 17 application. You can use OpenJDK.
+- **Java 17**
 - **Docker**: [How to install Docker](https://docs.docker.com/get-docker/)
 
 ## Environment preparation
@@ -77,7 +77,8 @@ curl http://localhost:8080
 
 ```shell
 #docker run will Create and Run a container from an image
-docker run -p 8080:8080 --name hwsbd helloworld-springboot-docker:latest
+#You can also use another ports configuration, now you should access the container using 8090
+docker run -p 8090:8080 --name hwsbd helloworld-springboot-docker:latest
 ```
 
 ### Useful Docker commands
