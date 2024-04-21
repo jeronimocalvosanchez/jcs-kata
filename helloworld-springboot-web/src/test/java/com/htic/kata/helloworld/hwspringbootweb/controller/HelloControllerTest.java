@@ -1,4 +1,4 @@
-package com.htic.kata.helloworld.hwspringboot.controller;
+package com.htic.kata.helloworld.hwspringbootweb.controller;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
