@@ -9,29 +9,28 @@ The goal of this exercise is to have up and running a web app using Spring Boot 
 
 ## Technologies used
 - **GIT**
-- **Maven**
-- **Java 22**: This project uses JDK version 22, but will compile using Java 17. You can use OpenJDK.
-- **Spring Boot 3.2.4**: A powerful framework for building Java-based applications with minimal configuration.
-We are going to use **web** and **test** modules
+- **Maven 3.9**
+- **Java 17**
+- **Spring Boot 3.2.4**: **web** and **test** modules
 
 ## Usage
 
 ```shell
-# Clone the Repository
+# Clone the Repository and navigate to the project folder
 git clone https://github.com/jeronimocalvosanchez/jcs-kata.git
 cd jcs-kata/helloworld-springboot-web
 
 # Build the Project, 3 tests should pass
 mvn clean test
 
-#Check that you cannot access the endpoints, you should get a error for each of the next two commands
+#Check that the endpoints are not accessible
 curl http://localhost:8080
 curl http://localhost:8080/hello
 
-# Run the Application. Make sure 8080 port is not already in used
+# Run the Application. Make sure 8080 port was not already in used
 mvn spring-boot:start
 
-# Access the application
+# Now the endpoints should be accessible
 # You should see a "App is up and running" message displayed.
 curl http://localhost:8080
 # You should see a "Hello, World!" message displayed.
@@ -45,7 +44,7 @@ mvn spring-boot:stop
 
 ### Add Spring Boot Dependencies
 
-First thing we need is to create a `pom.xml` file in our root folder.
+First thing we need is to create a `pom.xml` file in the project root folder.
 
 In the `pom.xml`, add the name and version of your project. You can also specify your project properties
 such as Java version used in your sources and target, and
