@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/java-17-blue)
 ![Static Badge](https://img.shields.io/badge/spring_boot-3.2.4-blue)
-![Static Badge](https://img.shields.io/badge/dcoker-26.0.0-blue)
+![Static Badge](https://img.shields.io/badge/docker-26.0.0-blue)
 ![Static Badge](https://img.shields.io/badge/license-mit-green)
 
 The goal of this exercise is to learn how to deploy a hello world application 
@@ -17,16 +17,20 @@ A Docker Image will be built from a JAR file generated from the previous Hello W
 
 ## Environment preparation
 
-First, we need to make sure our JAR application is working as expected.
+First, we need to make sure our JAR application is working as expected. This app should expose three endpoints
+- http://localhost:8080
+- http://localhost:8080/hello
+- http://localhost:8080/bye
 
 ```shell
 # Clone the Repository
 git clone https://github.com/jeronimocalvosanchez/jcs-kata.git
 cd jcs-kata/helloworld-springboot-docker
 
-# Make sure the app is not available. The following two commands should return an error
+# Make sure the app is not available. The following commands should return an error
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 
 # Run the Application. Make sure 8080 port is not already in used
 java -jar helloworld-springboot-docker-1.0.jar
@@ -36,6 +40,8 @@ java -jar helloworld-springboot-docker-1.0.jar
 curl http://localhost:8080
 # You should see a "Hello, World!" message displayed.
 curl http://localhost:8080/hello
+# You should see a "Bye, World!" message displayed.
+curl http://localhost:8080/bye
 
 #Kill the java process
 #In Windows
@@ -45,6 +51,7 @@ taskkill /F /PID pid_number
 # Make sure the app is no longer available. The following two commands should return an error
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 
 ```
 
