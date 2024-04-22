@@ -21,15 +21,21 @@ public class HelloControllerTest {
 	private MockMvc mvc;
 
 	@Test
-	public void getIndex() throws Exception {
+	public void testIndex() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string(equalTo("App is up and running")));
 	}
 	@Test
-	public void getHello() throws Exception {
+	public void testHello() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string(equalTo("Hello, World!")));
+	}
+	@Test
+	public void testBye() throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get("/bye").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string(equalTo("Bye, World!")));
 	}
 }

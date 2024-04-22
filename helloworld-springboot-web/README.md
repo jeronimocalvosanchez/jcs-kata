@@ -26,6 +26,7 @@ mvn clean test
 #Check that the endpoints are not accessible
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 
 # Run the Application. Make sure 8080 port was not already in used
 mvn spring-boot:start
@@ -35,6 +36,8 @@ mvn spring-boot:start
 curl http://localhost:8080
 # You should see a "Hello, World!" message displayed.
 curl http://localhost:8080/hello
+# You should see a "Vye, World!" message displayed.
+curl http://localhost:8080/bye
 
 # Stop the Application
 mvn spring-boot:stop
@@ -138,9 +141,10 @@ Now we want to test our controller, that will return a Hello World! message
     - `mvc.perform` will make one HTTP request, using GET method to`http://localhost:8080/hello`
     - Then the test expects the response to be status `200 OK` and its content to be `"Hello, World!"`
 
-Note that we are using two endpoints just to illustrate how URL mapping will work with Spring Boot Web
+Note that we are using three endpoints just to illustrate how URL mapping will work with Spring Boot Web
 * `"/"` will be mapped to `http://localhost:8080` since `8080` is the default port
 * `"/hello"` will be mapped to `http://localhost:8080/hello`
+* `"/bye"` will be mapped to `http://localhost:8080/bye`
 
 ```java
 package com.htic.kata.helloworld.hwspringbootweb.controller;
@@ -165,18 +169,24 @@ public class HelloControllerTest {
 	@Autowired
 	private MockMvc mvc;
 
-	@Test
-	public void getIndex() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("App is up and running")));
-	}
-	@Test
-	public void getHello() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("Hello, World!")));
-	}
+    @Test
+    public void testIndex() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON))
+              .andExpect(status().isOk())
+              .andExpect(content().string(equalTo("App is up and running")));
+    }
+    @Test
+    public void testHello() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
+              .andExpect(status().isOk())
+              .andExpect(content().string(equalTo("Hello, World!")));
+    }
+    @Test
+    public void testBye() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/bye").accept(MediaType.APPLICATION_JSON))
+              .andExpect(status().isOk())
+              .andExpect(content().string(equalTo("Bye, World!")));
+    }
 }
 ```
 
@@ -207,6 +217,11 @@ public class HelloController {
 	public String hello() {
 		return "Hello, World!";
 	}
+
+    @GetMapping("/bye")
+    public String bye() {
+        return "Bye, World!";
+    }
 }
 ```
 
@@ -220,6 +235,7 @@ We can check that the application is not started
 #Expect an error
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 ```
 
 Since we added spring boot support in our `pom.xml`, we can now simply run the application with the maven command `springboot:start`
@@ -234,6 +250,7 @@ Now the application should be up and run. We can test it
 #Expect it works
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 ```
 
 ### Stopping the application
@@ -250,6 +267,7 @@ Now the application should not respond
 #Expect an error
 curl http://localhost:8080
 curl http://localhost:8080/hello
+curl http://localhost:8080/bye
 ```
 
 ## License
