@@ -1,4 +1,4 @@
-# Hello World - Spring Boot - Docker Compose
+# Hello World - NGINX
 
 ![Static Badge](https://img.shields.io/badge/java-17-blue)
 ![Static Badge](https://img.shields.io/badge/spring_boot-3.2.4-blue)
