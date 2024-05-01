@@ -1,0 +1,28 @@
+services:
+  hw-sb-8085-service:
+    container_name: hwsb-8085
+    build:
+      context: .
+      dockerfile: Dockerfile-hwsb
+    ports:
+      - "8085:8080"
+    image: hw-sb-8085
+  hw-sb-8090-service:
+    container_name: hwsb-8090
+    build:
+      context: .
+      dockerfile: Dockerfile-hwsb
+    ports:
+      - "8090:8080"
+    image: hw-sb-8090
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - hw-sb-8085-service
+      - hw-sb-8090-service
